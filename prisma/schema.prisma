@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model device_basic_info {
+  name   String?             @db.VarChar(100)
+  id     BigInt              @id @default(autoincrement())
+  alarms device_alarm_info[]
+}
+
+model device_alarm_info {
+  id          BigInt            @id @default(autoincrement())
+  device_id   BigInt
+  message     String            @db.VarChar(255)
+  occurred_at DateTime          @default(now())
+  device      device_basic_info @relation(fields: [device_id], references: [id])
+}

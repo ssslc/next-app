@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import type { device_alarm_info, device_basic_info } from '@prisma/client'
+import type { device_alarm_info, device_basic_info } from '../../../generated/client'
 
 // 强制动态渲染，避免构建时预渲染
 export const dynamic = 'force-dynamic'

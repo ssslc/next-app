@@ -1,5 +1,5 @@
 import { prisma } from '../src/lib/prisma'
-import type { device_alarm_info, device_basic_info } from '@prisma/client'
+import type { device_alarm_info, device_basic_info } from '../src/generated/client'
 
 // 定义告警信息类型（包含关联的设备信息）
 type AlarmWithDevice = device_alarm_info & {

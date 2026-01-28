@@ -45,3 +45,4 @@ next-env.d.ts
 **/generated/
 node_modules/.prisma/
 prisma/migrations/
+next-app.zip

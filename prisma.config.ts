@@ -11,4 +11,9 @@ export default defineConfig({
   datasource: {
     url: env('DATABASE_URL'),
   },
+  generator: {
+    client: {
+      output: './src/generated/client',
+    },
+  },
 })

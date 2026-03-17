@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
-    "@prisma/client": "^7.2.0",
+    "@prisma/client-runtime-utils": "^7.5.0",
     "@radix-ui/react-slot": "^1.2.3",
     "@swc/helpers": "^0.5.19",
     "caniuse-lite": "^1.0.30001779",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@prisma/client": "^7.5.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.16.0",

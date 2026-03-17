@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "topic": "项目基础规范",
+    "memory_to_store": "包管理使用pnpm",
+    "memory_id": "1dc6"
+  }
+]

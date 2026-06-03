@@ -22,9 +22,10 @@ export default function DevicesPage() {
   const [filter, setFilter] = useState<string>('all');
   const [selectedDevice, setSelectedDevice] = useState<Device | null>(null);
   const [showConfigPanel, setShowConfigPanel] = useState(false);
+  const [isCreating, setIsCreating] = useState(false); // 标记是否为创建模式
   const [formData, setFormData] = useState<DeviceConfig>({
     name: '',
-    type: '',
+    type: '服务器',
     status: 'online',
     location: '',
     ipAddress: '',
@@ -76,8 +77,10 @@ export default function DevicesPage() {
     }
   };
 
+  // 打开编辑设备面板
   const handleConfigClick = (device: Device) => {
     setSelectedDevice(device);
+    setIsCreating(false);
     setFormData({
       name: device.name,
       type: device.type,
@@ -89,30 +92,74 @@ export default function DevicesPage() {
     setShowConfigPanel(true);
   };
 
+  // 打开创建设备面板
+  const handleAddDeviceClick = () => {
+    setSelectedDevice(null);
+    setIsCreating(true);
+    setFormData({
+      name: '',
+      type: '服务器',
+      status: 'online',
+      location: '',
+      ipAddress: '',
+      notes: ''
+    });
+    setShowConfigPanel(true);
+  };
+
+  // 保存设备（创建或更新）
   const handleSaveConfig = async () => {
-    if (!selectedDevice) return;
+    // 验证必填字段
+    if (!formData.name.trim()) {
+      alert('请输入设备名称');
+      return;
+    }
 
     try {
-      // 更新设备配置
-      const result = await deviceApi.updateDevice(selectedDevice.id, formData);
-      
-      if (result.success) {
-        console.log('设备配置更新成功:', result.data);
-        // 更新本地设备列表
-        setDevices(prev => prev.map(device => 
-          device.id === selectedDevice.id 
-            ? { ...device, ...formData }
-            : device
-        ));
+      if (isCreating) {
+        // 创建新设备
+        const result = await deviceApi.createDevice({
+          name: formData.name,
+          type: formData.type,
+          status: formData.status,
+          location: formData.location,
+          lastUpdate: new Date().toISOString().split('T')[0]
+        });
+        
+        if (result.success && result.data) {
+          console.log('设备创建成功:', result.data);
+          // 添加到本地设备列表
+          setDevices(prev => [...prev, result.data!]);
+        } else {
+          console.error('创建设备失败:', result.error);
+          alert(`创建失败: ${result.error}`);
+        }
       } else {
-        console.error('更新设备配置失败:', result.error);
-        // 可以在这里添加错误提示
+        // 更新设备配置
+        if (!selectedDevice) return;
+        
+        const result = await deviceApi.updateDevice(selectedDevice.id, formData);
+        
+        if (result.success) {
+          console.log('设备配置更新成功:', result.data);
+          // 更新本地设备列表
+          setDevices(prev => prev.map(device => 
+            device.id === selectedDevice.id 
+              ? { ...device, ...formData }
+              : device
+          ));
+        } else {
+          console.error('更新设备配置失败:', result.error);
+          alert(`更新失败: ${result.error}`);
+        }
       }
     } catch (error) {
       console.error('保存配置时发生错误:', error);
+      alert('操作失败，请重试');
     } finally {
       setShowConfigPanel(false);
       setSelectedDevice(null);
+      setIsCreating(false);
     }
   };
 
@@ -126,6 +173,7 @@ export default function DevicesPage() {
   const handleCloseConfig = () => {
     setShowConfigPanel(false);
     setSelectedDevice(null);
+    setIsCreating(false);
   };
 
   return (
@@ -133,40 +181,51 @@ export default function DevicesPage() {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-              <h1 className="text-2xl font-bold text-gray-800 mb-4 md:mb-0">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+              <h1 className="text-2xl font-bold text-gray-800">
                 设备列表
               </h1>
               
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 items-center">
+                {/* 添加设备按钮 */}
                 <Button
-                  onClick={() => setFilter('all')}
-                  variant={filter === 'all' ? 'default' : 'outline'}
-                  size="sm"
+                  onClick={handleAddDeviceClick}
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
-                  全部
+                  + 添加设备
                 </Button>
-                <Button
-                  onClick={() => setFilter('online')}
-                  variant={filter === 'online' ? 'default' : 'outline'}
-                  size="sm"
-                >
-                  在线
-                </Button>
-                <Button
-                  onClick={() => setFilter('offline')}
-                  variant={filter === 'offline' ? 'default' : 'outline'}
-                  size="sm"
-                >
-                  离线
-                </Button>
-                <Button
-                  onClick={() => setFilter('maintenance')}
-                  variant={filter === 'maintenance' ? 'default' : 'outline'}
-                  size="sm"
-                >
-                  维护中
-                </Button>
+                
+                {/* 筛选按钮 */}
+                <div className="flex gap-2">
+                  <Button
+                    onClick={() => setFilter('all')}
+                    variant={filter === 'all' ? 'default' : 'outline'}
+                    size="sm"
+                  >
+                    全部
+                  </Button>
+                  <Button
+                    onClick={() => setFilter('online')}
+                    variant={filter === 'online' ? 'default' : 'outline'}
+                    size="sm"
+                  >
+                    在线
+                  </Button>
+                  <Button
+                    onClick={() => setFilter('offline')}
+                    variant={filter === 'offline' ? 'default' : 'outline'}
+                    size="sm"
+                  >
+                    离线
+                  </Button>
+                  <Button
+                    onClick={() => setFilter('maintenance')}
+                    variant={filter === 'maintenance' ? 'default' : 'outline'}
+                    size="sm"
+                  >
+                    维护中
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -230,13 +289,13 @@ export default function DevicesPage() {
         </div>
       </div>
 
-      {/* 设备配置面板 */}
-      {showConfigPanel && selectedDevice && (
+      {/* 设备配置/创建面板 */}
+      {showConfigPanel && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-800">
-                设备配置 - {selectedDevice.name}
+                {isCreating ? '添加新设备' : `设备配置 - ${selectedDevice?.name}`}
               </h3>
               <Button
                 onClick={handleCloseConfig}
@@ -251,12 +310,13 @@ export default function DevicesPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  设备名称
+                  设备名称 <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
+                  placeholder="请输入设备名称"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -342,7 +402,7 @@ export default function DevicesPage() {
               <Button
                 onClick={handleSaveConfig}
               >
-                保存配置
+                {isCreating ? '创建设备' : '保存配置'}
               </Button>
             </div>
           </div>

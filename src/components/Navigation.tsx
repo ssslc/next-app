@@ -130,6 +130,16 @@ export default function Navigation() {
             )}
           </div>
           
+          {/* 智能助手 */}
+          <Link 
+            href="/agent" 
+            className={`px-3 py-2 rounded hover:bg-gray-700 transition-colors ${
+              pathname === '/agent' ? 'bg-gray-600' : ''
+            }`}
+          >
+            智能助手
+          </Link>
+          
           {/* 用户管理下拉菜单 */}
           <div className="relative" ref={dropdownRef}>
             <button

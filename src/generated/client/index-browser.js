@@ -132,6 +132,14 @@ exports.Prisma.Device_alarm_infoScalarFieldEnum = {
   occurred_at: 'occurred_at'
 };
 
+exports.Prisma.Agent_conversationScalarFieldEnum = {
+  id: 'id',
+  session_id: 'session_id',
+  role: 'role',
+  content: 'content',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -150,7 +158,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   device_basic_info: 'device_basic_info',
-  device_alarm_info: 'device_alarm_info'
+  device_alarm_info: 'device_alarm_info',
+  agent_conversation: 'agent_conversation'
 };
 
 /**

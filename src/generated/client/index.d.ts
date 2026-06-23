@@ -23,6 +23,11 @@ export type device_basic_info = $Result.DefaultSelection<Prisma.$device_basic_in
  * 
  */
 export type device_alarm_info = $Result.DefaultSelection<Prisma.$device_alarm_infoPayload>
+/**
+ * Model agent_conversation
+ * 
+ */
+export type agent_conversation = $Result.DefaultSelection<Prisma.$agent_conversationPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -164,6 +169,16 @@ export class PrismaClient<
     * ```
     */
   get device_alarm_info(): Prisma.device_alarm_infoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.agent_conversation`: Exposes CRUD operations for the **agent_conversation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Agent_conversations
+    * const agent_conversations = await prisma.agent_conversation.findMany()
+    * ```
+    */
+  get agent_conversation(): Prisma.agent_conversationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -599,7 +614,8 @@ export namespace Prisma {
 
   export const ModelName: {
     device_basic_info: 'device_basic_info',
-    device_alarm_info: 'device_alarm_info'
+    device_alarm_info: 'device_alarm_info',
+    agent_conversation: 'agent_conversation'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -615,7 +631,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "device_basic_info" | "device_alarm_info"
+      modelProps: "device_basic_info" | "device_alarm_info" | "agent_conversation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -767,6 +783,80 @@ export namespace Prisma {
           }
         }
       }
+      agent_conversation: {
+        payload: Prisma.$agent_conversationPayload<ExtArgs>
+        fields: Prisma.agent_conversationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.agent_conversationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.agent_conversationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>
+          }
+          findFirst: {
+            args: Prisma.agent_conversationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.agent_conversationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>
+          }
+          findMany: {
+            args: Prisma.agent_conversationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>[]
+          }
+          create: {
+            args: Prisma.agent_conversationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>
+          }
+          createMany: {
+            args: Prisma.agent_conversationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.agent_conversationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>[]
+          }
+          delete: {
+            args: Prisma.agent_conversationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>
+          }
+          update: {
+            args: Prisma.agent_conversationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>
+          }
+          deleteMany: {
+            args: Prisma.agent_conversationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.agent_conversationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.agent_conversationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>[]
+          }
+          upsert: {
+            args: Prisma.agent_conversationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agent_conversationPayload>
+          }
+          aggregate: {
+            args: Prisma.Agent_conversationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAgent_conversation>
+          }
+          groupBy: {
+            args: Prisma.agent_conversationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Agent_conversationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.agent_conversationCountArgs<ExtArgs>
+            result: $Utils.Optional<Agent_conversationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -877,6 +967,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     device_basic_info?: device_basic_infoOmit
     device_alarm_info?: device_alarm_infoOmit
+    agent_conversation?: agent_conversationOmit
   }
 
   /* Types for Logging */
@@ -3146,6 +3237,1040 @@ export namespace Prisma {
 
 
   /**
+   * Model agent_conversation
+   */
+
+  export type AggregateAgent_conversation = {
+    _count: Agent_conversationCountAggregateOutputType | null
+    _avg: Agent_conversationAvgAggregateOutputType | null
+    _sum: Agent_conversationSumAggregateOutputType | null
+    _min: Agent_conversationMinAggregateOutputType | null
+    _max: Agent_conversationMaxAggregateOutputType | null
+  }
+
+  export type Agent_conversationAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type Agent_conversationSumAggregateOutputType = {
+    id: bigint | null
+  }
+
+  export type Agent_conversationMinAggregateOutputType = {
+    id: bigint | null
+    session_id: string | null
+    role: string | null
+    content: string | null
+    created_at: Date | null
+  }
+
+  export type Agent_conversationMaxAggregateOutputType = {
+    id: bigint | null
+    session_id: string | null
+    role: string | null
+    content: string | null
+    created_at: Date | null
+  }
+
+  export type Agent_conversationCountAggregateOutputType = {
+    id: number
+    session_id: number
+    role: number
+    content: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type Agent_conversationAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type Agent_conversationSumAggregateInputType = {
+    id?: true
+  }
+
+  export type Agent_conversationMinAggregateInputType = {
+    id?: true
+    session_id?: true
+    role?: true
+    content?: true
+    created_at?: true
+  }
+
+  export type Agent_conversationMaxAggregateInputType = {
+    id?: true
+    session_id?: true
+    role?: true
+    content?: true
+    created_at?: true
+  }
+
+  export type Agent_conversationCountAggregateInputType = {
+    id?: true
+    session_id?: true
+    role?: true
+    content?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type Agent_conversationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which agent_conversation to aggregate.
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agent_conversations to fetch.
+     */
+    orderBy?: agent_conversationOrderByWithRelationInput | agent_conversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: agent_conversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agent_conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agent_conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned agent_conversations
+    **/
+    _count?: true | Agent_conversationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Agent_conversationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Agent_conversationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Agent_conversationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Agent_conversationMaxAggregateInputType
+  }
+
+  export type GetAgent_conversationAggregateType<T extends Agent_conversationAggregateArgs> = {
+        [P in keyof T & keyof AggregateAgent_conversation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAgent_conversation[P]>
+      : GetScalarType<T[P], AggregateAgent_conversation[P]>
+  }
+
+
+
+
+  export type agent_conversationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: agent_conversationWhereInput
+    orderBy?: agent_conversationOrderByWithAggregationInput | agent_conversationOrderByWithAggregationInput[]
+    by: Agent_conversationScalarFieldEnum[] | Agent_conversationScalarFieldEnum
+    having?: agent_conversationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Agent_conversationCountAggregateInputType | true
+    _avg?: Agent_conversationAvgAggregateInputType
+    _sum?: Agent_conversationSumAggregateInputType
+    _min?: Agent_conversationMinAggregateInputType
+    _max?: Agent_conversationMaxAggregateInputType
+  }
+
+  export type Agent_conversationGroupByOutputType = {
+    id: bigint
+    session_id: string
+    role: string
+    content: string
+    created_at: Date
+    _count: Agent_conversationCountAggregateOutputType | null
+    _avg: Agent_conversationAvgAggregateOutputType | null
+    _sum: Agent_conversationSumAggregateOutputType | null
+    _min: Agent_conversationMinAggregateOutputType | null
+    _max: Agent_conversationMaxAggregateOutputType | null
+  }
+
+  type GetAgent_conversationGroupByPayload<T extends agent_conversationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Agent_conversationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Agent_conversationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Agent_conversationGroupByOutputType[P]>
+            : GetScalarType<T[P], Agent_conversationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type agent_conversationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    role?: boolean
+    content?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["agent_conversation"]>
+
+  export type agent_conversationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    role?: boolean
+    content?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["agent_conversation"]>
+
+  export type agent_conversationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session_id?: boolean
+    role?: boolean
+    content?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["agent_conversation"]>
+
+  export type agent_conversationSelectScalar = {
+    id?: boolean
+    session_id?: boolean
+    role?: boolean
+    content?: boolean
+    created_at?: boolean
+  }
+
+  export type agent_conversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "session_id" | "role" | "content" | "created_at", ExtArgs["result"]["agent_conversation"]>
+
+  export type $agent_conversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "agent_conversation"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      session_id: string
+      role: string
+      content: string
+      created_at: Date
+    }, ExtArgs["result"]["agent_conversation"]>
+    composites: {}
+  }
+
+  type agent_conversationGetPayload<S extends boolean | null | undefined | agent_conversationDefaultArgs> = $Result.GetResult<Prisma.$agent_conversationPayload, S>
+
+  type agent_conversationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<agent_conversationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Agent_conversationCountAggregateInputType | true
+    }
+
+  export interface agent_conversationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['agent_conversation'], meta: { name: 'agent_conversation' } }
+    /**
+     * Find zero or one Agent_conversation that matches the filter.
+     * @param {agent_conversationFindUniqueArgs} args - Arguments to find a Agent_conversation
+     * @example
+     * // Get one Agent_conversation
+     * const agent_conversation = await prisma.agent_conversation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends agent_conversationFindUniqueArgs>(args: SelectSubset<T, agent_conversationFindUniqueArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Agent_conversation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {agent_conversationFindUniqueOrThrowArgs} args - Arguments to find a Agent_conversation
+     * @example
+     * // Get one Agent_conversation
+     * const agent_conversation = await prisma.agent_conversation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends agent_conversationFindUniqueOrThrowArgs>(args: SelectSubset<T, agent_conversationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Agent_conversation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agent_conversationFindFirstArgs} args - Arguments to find a Agent_conversation
+     * @example
+     * // Get one Agent_conversation
+     * const agent_conversation = await prisma.agent_conversation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends agent_conversationFindFirstArgs>(args?: SelectSubset<T, agent_conversationFindFirstArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Agent_conversation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agent_conversationFindFirstOrThrowArgs} args - Arguments to find a Agent_conversation
+     * @example
+     * // Get one Agent_conversation
+     * const agent_conversation = await prisma.agent_conversation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends agent_conversationFindFirstOrThrowArgs>(args?: SelectSubset<T, agent_conversationFindFirstOrThrowArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Agent_conversations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agent_conversationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Agent_conversations
+     * const agent_conversations = await prisma.agent_conversation.findMany()
+     * 
+     * // Get first 10 Agent_conversations
+     * const agent_conversations = await prisma.agent_conversation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const agent_conversationWithIdOnly = await prisma.agent_conversation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends agent_conversationFindManyArgs>(args?: SelectSubset<T, agent_conversationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Agent_conversation.
+     * @param {agent_conversationCreateArgs} args - Arguments to create a Agent_conversation.
+     * @example
+     * // Create one Agent_conversation
+     * const Agent_conversation = await prisma.agent_conversation.create({
+     *   data: {
+     *     // ... data to create a Agent_conversation
+     *   }
+     * })
+     * 
+     */
+    create<T extends agent_conversationCreateArgs>(args: SelectSubset<T, agent_conversationCreateArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Agent_conversations.
+     * @param {agent_conversationCreateManyArgs} args - Arguments to create many Agent_conversations.
+     * @example
+     * // Create many Agent_conversations
+     * const agent_conversation = await prisma.agent_conversation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends agent_conversationCreateManyArgs>(args?: SelectSubset<T, agent_conversationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Agent_conversations and returns the data saved in the database.
+     * @param {agent_conversationCreateManyAndReturnArgs} args - Arguments to create many Agent_conversations.
+     * @example
+     * // Create many Agent_conversations
+     * const agent_conversation = await prisma.agent_conversation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Agent_conversations and only return the `id`
+     * const agent_conversationWithIdOnly = await prisma.agent_conversation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends agent_conversationCreateManyAndReturnArgs>(args?: SelectSubset<T, agent_conversationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Agent_conversation.
+     * @param {agent_conversationDeleteArgs} args - Arguments to delete one Agent_conversation.
+     * @example
+     * // Delete one Agent_conversation
+     * const Agent_conversation = await prisma.agent_conversation.delete({
+     *   where: {
+     *     // ... filter to delete one Agent_conversation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends agent_conversationDeleteArgs>(args: SelectSubset<T, agent_conversationDeleteArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Agent_conversation.
+     * @param {agent_conversationUpdateArgs} args - Arguments to update one Agent_conversation.
+     * @example
+     * // Update one Agent_conversation
+     * const agent_conversation = await prisma.agent_conversation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends agent_conversationUpdateArgs>(args: SelectSubset<T, agent_conversationUpdateArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Agent_conversations.
+     * @param {agent_conversationDeleteManyArgs} args - Arguments to filter Agent_conversations to delete.
+     * @example
+     * // Delete a few Agent_conversations
+     * const { count } = await prisma.agent_conversation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends agent_conversationDeleteManyArgs>(args?: SelectSubset<T, agent_conversationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Agent_conversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agent_conversationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Agent_conversations
+     * const agent_conversation = await prisma.agent_conversation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends agent_conversationUpdateManyArgs>(args: SelectSubset<T, agent_conversationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Agent_conversations and returns the data updated in the database.
+     * @param {agent_conversationUpdateManyAndReturnArgs} args - Arguments to update many Agent_conversations.
+     * @example
+     * // Update many Agent_conversations
+     * const agent_conversation = await prisma.agent_conversation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Agent_conversations and only return the `id`
+     * const agent_conversationWithIdOnly = await prisma.agent_conversation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends agent_conversationUpdateManyAndReturnArgs>(args: SelectSubset<T, agent_conversationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Agent_conversation.
+     * @param {agent_conversationUpsertArgs} args - Arguments to update or create a Agent_conversation.
+     * @example
+     * // Update or create a Agent_conversation
+     * const agent_conversation = await prisma.agent_conversation.upsert({
+     *   create: {
+     *     // ... data to create a Agent_conversation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Agent_conversation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends agent_conversationUpsertArgs>(args: SelectSubset<T, agent_conversationUpsertArgs<ExtArgs>>): Prisma__agent_conversationClient<$Result.GetResult<Prisma.$agent_conversationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Agent_conversations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agent_conversationCountArgs} args - Arguments to filter Agent_conversations to count.
+     * @example
+     * // Count the number of Agent_conversations
+     * const count = await prisma.agent_conversation.count({
+     *   where: {
+     *     // ... the filter for the Agent_conversations we want to count
+     *   }
+     * })
+    **/
+    count<T extends agent_conversationCountArgs>(
+      args?: Subset<T, agent_conversationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Agent_conversationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Agent_conversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Agent_conversationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Agent_conversationAggregateArgs>(args: Subset<T, Agent_conversationAggregateArgs>): Prisma.PrismaPromise<GetAgent_conversationAggregateType<T>>
+
+    /**
+     * Group by Agent_conversation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agent_conversationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends agent_conversationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: agent_conversationGroupByArgs['orderBy'] }
+        : { orderBy?: agent_conversationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, agent_conversationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAgent_conversationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the agent_conversation model
+   */
+  readonly fields: agent_conversationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for agent_conversation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__agent_conversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the agent_conversation model
+   */
+  interface agent_conversationFieldRefs {
+    readonly id: FieldRef<"agent_conversation", 'BigInt'>
+    readonly session_id: FieldRef<"agent_conversation", 'String'>
+    readonly role: FieldRef<"agent_conversation", 'String'>
+    readonly content: FieldRef<"agent_conversation", 'String'>
+    readonly created_at: FieldRef<"agent_conversation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * agent_conversation findUnique
+   */
+  export type agent_conversationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * Filter, which agent_conversation to fetch.
+     */
+    where: agent_conversationWhereUniqueInput
+  }
+
+  /**
+   * agent_conversation findUniqueOrThrow
+   */
+  export type agent_conversationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * Filter, which agent_conversation to fetch.
+     */
+    where: agent_conversationWhereUniqueInput
+  }
+
+  /**
+   * agent_conversation findFirst
+   */
+  export type agent_conversationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * Filter, which agent_conversation to fetch.
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agent_conversations to fetch.
+     */
+    orderBy?: agent_conversationOrderByWithRelationInput | agent_conversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for agent_conversations.
+     */
+    cursor?: agent_conversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agent_conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agent_conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of agent_conversations.
+     */
+    distinct?: Agent_conversationScalarFieldEnum | Agent_conversationScalarFieldEnum[]
+  }
+
+  /**
+   * agent_conversation findFirstOrThrow
+   */
+  export type agent_conversationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * Filter, which agent_conversation to fetch.
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agent_conversations to fetch.
+     */
+    orderBy?: agent_conversationOrderByWithRelationInput | agent_conversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for agent_conversations.
+     */
+    cursor?: agent_conversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agent_conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agent_conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of agent_conversations.
+     */
+    distinct?: Agent_conversationScalarFieldEnum | Agent_conversationScalarFieldEnum[]
+  }
+
+  /**
+   * agent_conversation findMany
+   */
+  export type agent_conversationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * Filter, which agent_conversations to fetch.
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agent_conversations to fetch.
+     */
+    orderBy?: agent_conversationOrderByWithRelationInput | agent_conversationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing agent_conversations.
+     */
+    cursor?: agent_conversationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agent_conversations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agent_conversations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of agent_conversations.
+     */
+    distinct?: Agent_conversationScalarFieldEnum | Agent_conversationScalarFieldEnum[]
+  }
+
+  /**
+   * agent_conversation create
+   */
+  export type agent_conversationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a agent_conversation.
+     */
+    data: XOR<agent_conversationCreateInput, agent_conversationUncheckedCreateInput>
+  }
+
+  /**
+   * agent_conversation createMany
+   */
+  export type agent_conversationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many agent_conversations.
+     */
+    data: agent_conversationCreateManyInput | agent_conversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * agent_conversation createManyAndReturn
+   */
+  export type agent_conversationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * The data used to create many agent_conversations.
+     */
+    data: agent_conversationCreateManyInput | agent_conversationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * agent_conversation update
+   */
+  export type agent_conversationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a agent_conversation.
+     */
+    data: XOR<agent_conversationUpdateInput, agent_conversationUncheckedUpdateInput>
+    /**
+     * Choose, which agent_conversation to update.
+     */
+    where: agent_conversationWhereUniqueInput
+  }
+
+  /**
+   * agent_conversation updateMany
+   */
+  export type agent_conversationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update agent_conversations.
+     */
+    data: XOR<agent_conversationUpdateManyMutationInput, agent_conversationUncheckedUpdateManyInput>
+    /**
+     * Filter which agent_conversations to update
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * Limit how many agent_conversations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * agent_conversation updateManyAndReturn
+   */
+  export type agent_conversationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * The data used to update agent_conversations.
+     */
+    data: XOR<agent_conversationUpdateManyMutationInput, agent_conversationUncheckedUpdateManyInput>
+    /**
+     * Filter which agent_conversations to update
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * Limit how many agent_conversations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * agent_conversation upsert
+   */
+  export type agent_conversationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the agent_conversation to update in case it exists.
+     */
+    where: agent_conversationWhereUniqueInput
+    /**
+     * In case the agent_conversation found by the `where` argument doesn't exist, create a new agent_conversation with this data.
+     */
+    create: XOR<agent_conversationCreateInput, agent_conversationUncheckedCreateInput>
+    /**
+     * In case the agent_conversation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<agent_conversationUpdateInput, agent_conversationUncheckedUpdateInput>
+  }
+
+  /**
+   * agent_conversation delete
+   */
+  export type agent_conversationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+    /**
+     * Filter which agent_conversation to delete.
+     */
+    where: agent_conversationWhereUniqueInput
+  }
+
+  /**
+   * agent_conversation deleteMany
+   */
+  export type agent_conversationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which agent_conversations to delete
+     */
+    where?: agent_conversationWhereInput
+    /**
+     * Limit how many agent_conversations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * agent_conversation without action
+   */
+  export type agent_conversationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agent_conversation
+     */
+    select?: agent_conversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agent_conversation
+     */
+    omit?: agent_conversationOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3175,6 +4300,17 @@ export namespace Prisma {
   };
 
   export type Device_alarm_infoScalarFieldEnum = (typeof Device_alarm_infoScalarFieldEnum)[keyof typeof Device_alarm_infoScalarFieldEnum]
+
+
+  export const Agent_conversationScalarFieldEnum: {
+    id: 'id',
+    session_id: 'session_id',
+    role: 'role',
+    content: 'content',
+    created_at: 'created_at'
+  };
+
+  export type Agent_conversationScalarFieldEnum = (typeof Agent_conversationScalarFieldEnum)[keyof typeof Agent_conversationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3373,6 +4509,60 @@ export namespace Prisma {
     occurred_at?: DateTimeWithAggregatesFilter<"device_alarm_info"> | Date | string
   }
 
+  export type agent_conversationWhereInput = {
+    AND?: agent_conversationWhereInput | agent_conversationWhereInput[]
+    OR?: agent_conversationWhereInput[]
+    NOT?: agent_conversationWhereInput | agent_conversationWhereInput[]
+    id?: BigIntFilter<"agent_conversation"> | bigint | number
+    session_id?: StringFilter<"agent_conversation"> | string
+    role?: StringFilter<"agent_conversation"> | string
+    content?: StringFilter<"agent_conversation"> | string
+    created_at?: DateTimeFilter<"agent_conversation"> | Date | string
+  }
+
+  export type agent_conversationOrderByWithRelationInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agent_conversationWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: agent_conversationWhereInput | agent_conversationWhereInput[]
+    OR?: agent_conversationWhereInput[]
+    NOT?: agent_conversationWhereInput | agent_conversationWhereInput[]
+    session_id?: StringFilter<"agent_conversation"> | string
+    role?: StringFilter<"agent_conversation"> | string
+    content?: StringFilter<"agent_conversation"> | string
+    created_at?: DateTimeFilter<"agent_conversation"> | Date | string
+  }, "id">
+
+  export type agent_conversationOrderByWithAggregationInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    created_at?: SortOrder
+    _count?: agent_conversationCountOrderByAggregateInput
+    _avg?: agent_conversationAvgOrderByAggregateInput
+    _max?: agent_conversationMaxOrderByAggregateInput
+    _min?: agent_conversationMinOrderByAggregateInput
+    _sum?: agent_conversationSumOrderByAggregateInput
+  }
+
+  export type agent_conversationScalarWhereWithAggregatesInput = {
+    AND?: agent_conversationScalarWhereWithAggregatesInput | agent_conversationScalarWhereWithAggregatesInput[]
+    OR?: agent_conversationScalarWhereWithAggregatesInput[]
+    NOT?: agent_conversationScalarWhereWithAggregatesInput | agent_conversationScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"agent_conversation"> | bigint | number
+    session_id?: StringWithAggregatesFilter<"agent_conversation"> | string
+    role?: StringWithAggregatesFilter<"agent_conversation"> | string
+    content?: StringWithAggregatesFilter<"agent_conversation"> | string
+    created_at?: DateTimeWithAggregatesFilter<"agent_conversation"> | Date | string
+  }
+
   export type device_basic_infoCreateInput = {
     name?: string | null
     id?: bigint | number
@@ -3458,6 +4648,62 @@ export namespace Prisma {
     device_id?: BigIntFieldUpdateOperationsInput | bigint | number
     message?: StringFieldUpdateOperationsInput | string
     occurred_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agent_conversationCreateInput = {
+    id?: bigint | number
+    session_id: string
+    role: string
+    content: string
+    created_at?: Date | string
+  }
+
+  export type agent_conversationUncheckedCreateInput = {
+    id?: bigint | number
+    session_id: string
+    role: string
+    content: string
+    created_at?: Date | string
+  }
+
+  export type agent_conversationUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    session_id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agent_conversationUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    session_id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agent_conversationCreateManyInput = {
+    id?: bigint | number
+    session_id: string
+    role: string
+    content: string
+    created_at?: Date | string
+  }
+
+  export type agent_conversationUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    session_id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agent_conversationUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    session_id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -3650,6 +4896,38 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type agent_conversationCountOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agent_conversationAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type agent_conversationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agent_conversationMinOrderByAggregateInput = {
+    id?: SortOrder
+    session_id?: SortOrder
+    role?: SortOrder
+    content?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agent_conversationSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type device_alarm_infoCreateNestedManyWithoutDeviceInput = {

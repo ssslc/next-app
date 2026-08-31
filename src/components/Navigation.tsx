@@ -8,8 +8,10 @@ export default function Navigation() {
   const pathname = usePathname();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isDeviceMenuOpen, setIsDeviceMenuOpen] = useState(false);
+  const [isReportMenuOpen, setIsReportMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const deviceDropdownRef = useRef<HTMLDivElement>(null);
+  const reportDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -18,6 +20,9 @@ export default function Navigation() {
       }
       if (deviceDropdownRef.current && !deviceDropdownRef.current.contains(event.target as Node)) {
         setIsDeviceMenuOpen(false);
+      }
+      if (reportDropdownRef.current && !reportDropdownRef.current.contains(event.target as Node)) {
+        setIsReportMenuOpen(false);
       }
     };
 
@@ -31,6 +36,10 @@ export default function Navigation() {
 
   const toggleDeviceMenu = () => {
     setIsDeviceMenuOpen(!isDeviceMenuOpen);
+  };
+
+  const toggleReportMenu = () => {
+    setIsReportMenuOpen(!isReportMenuOpen);
   };
 
   return (
@@ -86,6 +95,50 @@ export default function Navigation() {
               </div>
             )}
           </div>
+          
+          {/* 数据报表下拉菜单 */}
+          <div className="relative" ref={reportDropdownRef}>
+            <button
+              onClick={toggleReportMenu}
+              className={`px-3 py-2 rounded hover:bg-gray-700 transition-colors ${
+                pathname.startsWith('/devices/dashboard') ? 'bg-gray-600' : ''
+              }`}
+            >
+              数据报表
+              <svg
+                className={`ml-1 h-4 w-4 inline-block transition-transform ${
+                  isReportMenuOpen ? 'rotate-180' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {isReportMenuOpen && (
+              <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                <Link
+                  href="/devices/dashboard"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsReportMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+              </div>
+            )}
+          </div>
+          
+          {/* 智能助手 */}
+          <Link 
+            href="/agent" 
+            className={`px-3 py-2 rounded hover:bg-gray-700 transition-colors ${
+              pathname === '/agent' ? 'bg-gray-600' : ''
+            }`}
+          >
+            智能助手
+          </Link>
           
           {/* 用户管理下拉菜单 */}
           <div className="relative" ref={dropdownRef}>

@@ -39,17 +39,77 @@ mkdir -p src/app/api/devices
 touch src/app/api/devices/route.ts
 touch src/app/api/devices/[id]/route.ts
 
-my-backend-app/
+## 项目结构
+
+```
+next-app/
 ├── src/
-│   ├── app/
-│   │   ├── api/
+│   ├── app/                          # Next.js App Router 目录
+│   │   ├── api/                      # 【后端】API 路由 (Next.js Route Handlers)
 │   │   │   ├── devices/
-│   │   │   │   ├── route.ts          # /api/devices
-│   │   │   │   └── [id]/
-│   │   │   │       └── route.ts      # /api/devices/123
-│   │   │   └── ...
-│   │   ├── globals.css
-│   │   └── layout.tsx
+│   │   │   │   └── route.ts          # GET/POST /api/devices
+│   │   │   └── health/
+│   │   │       └── route.ts          # GET /api/health
+│   │   ├── devices/                  # 【前端】设备管理页面
+│   │   │   ├── page.tsx              # /devices
+│   │   │   └── alarms/
+│   │   │       └── page.tsx          # /devices/alarms
+│   │   ├── user/                     # 【前端】用户相关页面
+│   │   │   ├── page.tsx              # /user
+│   │   │   ├── profile/
+│   │   │   │   └── page.tsx          # /user/profile
+│   │   │   └── permissions/
+│   │   │       └── page.tsx          # /user/permissions
+│   │   ├── layout.tsx                # 【前端】根布局组件
+│   │   ├── page.tsx                  # 【前端】首页 (/)
+│   │   └── globals.css               # 全局样式
+│   ├── components/                   # 【前端】React 组件
+│   │   ├── ui/
+│   │   │   └── button.tsx            # UI 组件
+│   │   └── Navigation.tsx            # 导航组件
+│   ├── lib/                          # 【共享】工具库
+│   │   ├── api.ts                    # API 客户端封装
+│   │   ├── prisma.ts                 # Prisma 客户端实例
+│   │   └── response.ts               # API 响应工具
+│   └── function-demo/                # 功能演示代码
+│       └── reactiveHandle.jsx
+├── prisma/                           # 【后端】数据库相关
+│   └── schema.prisma                 # Prisma 数据库模型定义
+├── scripts/                          # 【后端】脚本工具
+│   ├── seed-alarms.ts                # 数据库种子脚本
+│   └── query-alarms.ts               # 查询脚本
+├── public/                           # 【前端】静态资源
+│   ├── next.svg
 │   └── ...
-├── package.json
-└── next.config.js
+├── package.json                      # 项目依赖配置
+├── next.config.ts                    # Next.js 配置
+├── tsconfig.json                     # TypeScript 配置
+├── prisma.config.ts                  # Prisma 配置
+└── Dockerfile                        # Docker 部署配置
+```
+
+### 架构说明
+
+本项目采用 **Next.js 全栈架构**：
+
+- **前端代码**：
+  - `src/app/` 下的 `page.tsx`、`layout.tsx` 等文件（除了 `api/` 目录）
+  - `src/components/` - React 组件
+  - `public/` - 静态资源（图片、字体等）
+
+- **后端代码**：
+  - `src/app/api/` - Next.js API 路由（Route Handlers），提供 RESTful API
+  - `prisma/` - 数据库模型和迁移
+  - `scripts/` - 数据库脚本和后端工具
+
+- **共享代码**：
+  - `src/lib/` - 前后端共用的工具函数和类型定义
+
+### 技术栈
+
+- **框架**: Next.js 15 (App Router)
+- **语言**: TypeScript
+- **数据库**: Prisma ORM
+- **包管理**: pnpm
+- **样式**: CSS Modules + Tailwind CSS
+- **部署**: Docker
